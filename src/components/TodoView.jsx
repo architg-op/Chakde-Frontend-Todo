@@ -14,6 +14,7 @@ import EditOffOutlinedIcon from '@mui/icons-material/EditOffOutlined';
 import CloseIcon from '@mui/icons-material/Close';
 import Stack from '@mui/material/Stack';
 import { useState } from 'react';
+import Divider from '@mui/material/Divider';
 
 function TodoView() {
   const { todos, setTodos } = useContext(MyContext);
@@ -25,6 +26,8 @@ function TodoView() {
 
   const setTodo = (f) => {
     setClickedTodo(f.target.id);
+    console.log(f.target.id);
+    console.log(clickedTodo);
     setEditOn(true);
   };
 
@@ -32,7 +35,24 @@ function TodoView() {
     setEditOn(false);
   };
 
+  const handleSubmit = () => {
+    setEditOn(false);
+  };
+
   const updateTodo = () => {};
+
+  const deleteTodo = (e) => {
+    if (confirm(`Are you sure you want to delete`)) {
+      console.log(e.target.id);
+      const newTodos = todos.filter((todo) => todo.id != e.target.id);
+      console.log(newTodos.length);
+      setTodos(newTodos);
+    } else {
+      console.log('Thing was not saved to the database.');
+    }
+  };
+
+  console.log(todos);
 
   return (
     <div>
@@ -47,6 +67,7 @@ function TodoView() {
                 variant="outlined"
                 type="text"
                 value={editedTodo}
+                onChange={(e) => setEditedTodo(e.target.value)}
               />
               <Button
                 id={todo.id}
@@ -56,7 +77,12 @@ function TodoView() {
               >
                 Cancel
               </Button>
-              <Button id={todo.id} key={todo.id} variant="contained">
+              <Button
+                id={todo.id}
+                key={todo.id}
+                variant="contained"
+                onClick={handleSubmit}
+              >
                 Submit
               </Button>
             </Stack>
@@ -76,15 +102,7 @@ function TodoView() {
                         aria-label="edit"
                       >
                         {editDeleteToggle ? (
-                          <EditOutlinedIcon
-                            id={todo.id}
-                            key={todo.id}
-                            // onClick={
-                            //   editDeleteToggle
-                            //     ? alert('Sure you want to delete this todo')
-                            //     : ''
-                            // }
-                          />
+                          <EditOutlinedIcon id={todo.id} key={todo.id} />
                         ) : (
                           <EditOffOutlinedIcon />
                         )}
@@ -93,7 +111,11 @@ function TodoView() {
 
                     <IconButton edge="end" aria-label="delete">
                       {editDeleteToggle ? (
-                        <DeleteOutlineOutlinedIcon />
+                        <DeleteOutlineOutlinedIcon
+                          id={todo.id}
+                          key={todo.id}
+                          onClick={deleteTodo}
+                        />
                       ) : (
                         <DeleteForeverOutlinedIcon />
                       )}
