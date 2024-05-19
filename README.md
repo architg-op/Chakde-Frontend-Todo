@@ -4,4 +4,4 @@
 
 Run the app through the `npm run dev` command
 
-Deployed live at:- https://architg-op.github.io/Chakde-Frontend-Todo/
+Deployed live at:- https://architg-op.github.io/Todo-app/
