@@ -11,7 +11,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 function App() {
   const darkTheme = createTheme({
     palette: {
-      mode: 1 == 1 ? 'dark' : 'light',
+      mode: 1 == 0 ? 'dark' : 'light',
     },
   });
   const [todos, setTodos] = useState([

@@ -8,6 +8,7 @@ import Button from '@mui/material/Button';
 import { useContext } from 'react';
 import { MyContext } from '../MyContext';
 import { v4 as uuid } from 'uuid';
+import CheckIcon from '@mui/icons-material/Check';
 
 function TodoForm() {
   const { todos, setTodos } = useContext(MyContext);
@@ -46,6 +47,7 @@ function TodoForm() {
           variant="outlined"
           onChange={todoChange}
           value={newTodo}
+          fullWidth="1"
           required
         />
         <Button
